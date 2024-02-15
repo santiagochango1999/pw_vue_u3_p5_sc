@@ -1,10 +1,34 @@
 <template>
   <h1>Componente Estudiante</h1>
-  <input v-model="id" type="text" />
-  <button @click="consultarPorId">ConsultaR</button>
-  <input v-model="nombre" type="text" />
-  <input  v-model="apellido" type="text">
-  <button @click="insertar">Insertar</button>
+  <div class="container">
+    <div class="GET">
+      <h2>Buscar por ID:</h2>
+      <input id="id" v-model="id" type="text" />
+      <button @click="consultarPorId">Consultar</button>
+      <form class="form" action="">
+        <p type="DATOS DEL ESTUDIANTE:"></p>
+        <p type="Nombre: "><input v-model="nombre" type="text" /></p>
+        <p type="Apellido: "><input v-model="apellido" type="text" /></p>
+        <p type="Genero: "><input v-model="genero" type="text" /></p>
+        <p type="Fecha Nacimiento: ">
+          <input v-model="fechaNacimiento" type="text" />
+        </p>
+      </form>
+    </div>
+    <div class="POST">
+      <h2 id="titulo2">Ingresar DATOS:</h2>
+      <form class="form2" action="">
+        <p type="DATOS DEL INGRESO DE ESTUDIANTE:"></p>
+        <p type="Nombre: "><input v-model="nombreI" type="text" /></p>
+        <p type="Apellido: "><input v-model="apellidoI" type="text" /></p>
+        <p type="Genero: "><input v-model="generoI" type="text" /></p>
+        <p type="Fecha Nacimiento: ">
+          <input v-model="fechaNacimientoI" type="datetime" />
+        </p>
+      </form>
+      <button @click="insertar">Insertar</button>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -17,7 +41,13 @@ export default {
     return {
       id: null,
       nombre: null,
-      apellido:null,
+      apellido: null,
+      genero: null,
+      fechaNacimiento: null,
+      nombreI: null,
+      apellidoI: null,
+      generoI: null,
+      fechaNacimientoI: null,
     };
   },
   methods: {
@@ -25,13 +55,16 @@ export default {
       const data = await consultarEstudianteFachada(this.id);
       console.log("Desde componente" + data);
       this.nombre = data.nombre;
+      this.apellido = data.apellido;
+      this.genero = data.genero;
+      this.fechaNacimiento = data.fechaNacimiento;
     },
     async insertar() {
       const estuBody = {
-        nombre: "juan",
-        apellido: this.apellido,
-        genero: "M",
-        fechaNacimiento: "1999-10-10T00:00:00",
+        nombre: this.nombreI,
+        apellido: this.apellidoI,
+        genero: this.generoI,
+        fechaNacimiento: this.fechaNacimientoI,
       };
       await insertarEstudianteFachada(estuBody);
     },
@@ -40,4 +73,48 @@ export default {
 </script>
 
 <style>
+.container {
+  display: grid;
+  grid-template-columns: repeat(2, 40%);
+  align-content: center;
+  justify-content: center;
+}
+.GET {
+  display: grid;
+  align-content: center;
+  justify-content: center;
+}
+.POST {
+  display: grid;
+  align-content: center;
+  justify-content: center;
+}
+form {
+  width: 340px;
+  height: 300px;
+  background-color: #1e4f75;
+  border-radius: 8px;
+  padding: 10px 30px;
+  margin: 5px;
+  font-family: "Times New Roman", Times, serif;
+  box-shadow: 0px 0px 40px -10px #000;
+}
+
+p:before {
+  content: attr(type);
+  display: block;
+  margin: 3px 2px;
+  font-size: 16px;
+  color: #fffdfd;
+}
+button{
+  margin: 10px;
+}
+#id{
+  margin-left: 150px;
+  width: 100px;
+}
+#titulo2{
+  margin-bottom: 50px;
+}
 </style>
