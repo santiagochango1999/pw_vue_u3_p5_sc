@@ -3,15 +3,25 @@
   <div class="container">
     <div class="GET">
       <h2>Buscar por ID:</h2>
-      <input id="id" v-model="id" type="text" />
+      <input id="id" v-model="id" type="text" placeholder="Ingrese ID" />
       <button @click="consultarPorId">Consultar</button>
       <form class="form" action="">
         <p type="DATOS DEL ESTUDIANTE:"></p>
-        <p type="Nombre: "><input v-model="nombre" type="text" /></p>
-        <p type="Apellido: "><input v-model="apellido" type="text" /></p>
-        <p type="Genero: "><input v-model="genero" type="text" /></p>
+        <p type="Nombre: ">
+          <input v-model="nombre" type="text" placeholder="nombre" />
+        </p>
+        <p type="Apellido: ">
+          <input v-model="apellido" type="text" placeholder="apellido" />
+        </p>
+        <p type="Genero: ">
+          <input v-model="genero" type="text" placeholder="genero" />
+        </p>
         <p type="Fecha Nacimiento: ">
-          <input v-model="fechaNacimiento" type="text" />
+          <input
+            v-model="fechaNacimiento"
+            type="text"
+            placeholder="fechaNacimiento"
+          />
         </p>
       </form>
     </div>
@@ -27,6 +37,8 @@
         </p>
       </form>
       <button @click="insertar">Insertar</button>
+      <button @click="actualizar">actualizar</button>
+      <button @click="eliminar">eliminar</button>
     </div>
   </div>
 </template>
@@ -35,6 +47,8 @@
 import {
   consultarEstudianteFachada,
   insertarEstudianteFachada,
+  actualizarFachada,
+  eliminarFachada,
 } from "../helpers/clienteEstudiante.js";
 export default {
   data() {
@@ -67,6 +81,18 @@ export default {
         fechaNacimiento: this.fechaNacimientoI,
       };
       await insertarEstudianteFachada(estuBody);
+    },
+    async actualizar() {
+      const body = {
+        nombre: this.nombreI,
+        apellido: this.apellidoI,
+        genero: this.generoI,
+        fechaNacimiento: this.fechaNacimientoI,
+      };
+      await actualizarFachada(this.id, body);
+    },
+    async eliminar() {
+      await eliminarFachada(this.id);
     },
   },
 };
@@ -107,14 +133,14 @@ p:before {
   font-size: 16px;
   color: #fffdfd;
 }
-button{
+button {
   margin: 10px;
 }
-#id{
+#id {
   margin-left: 150px;
   width: 100px;
 }
-#titulo2{
+#titulo2 {
   margin-bottom: 50px;
 }
 </style>
