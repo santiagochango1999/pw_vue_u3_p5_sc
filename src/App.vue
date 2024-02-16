@@ -1,5 +1,7 @@
 <template>
-  <EstudiantesPaginaVue/>
+  <!-- <EstudiantesPaginaVue/> -->
+  <h1>Universidad Central</h1>
+  <router-view/>
 </template>
 
 <script>
