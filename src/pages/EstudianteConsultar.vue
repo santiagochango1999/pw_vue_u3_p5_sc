@@ -28,13 +28,21 @@ export default {
   },
   methods: {
     async consultarPorId() {
-      const data = await consultarEstudianteFachada(this.id);
+      const data = await consultarEstudianteFachada(this.$route.params.id);
       console.log("Desde componente" + data);
-      this.onjectData.nombre=data.nombre;
+      this.onjectData.nombre = data.nombre;
       this.onjectData.apellido = data.apellido;
       this.onjectData.genero = data.genero;
       this.onjectData.fechaNacimiento = data.fechaNacimiento;
     },
+  },
+  created() {
+    console.log(this.$route);
+    console.log(this.$route.params.id);
+    console.log(this.$route.query.anio);
+    console.log(this.$route.query.edad);
+
+    this.consultarPorId();
   },
 };
 </script>
