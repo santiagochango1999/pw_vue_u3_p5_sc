@@ -1,31 +1,31 @@
 <template>
-  <h1>Componente Estudiante</h1>
-  <div class="container">
-    <div class="GET">
-      <h2>Buscar por ID:</h2>
+  <!-- <h1>Componente Estudiante</h1> -->
+  <!-- <div class="container"> -->
+  <div class="GET">
+    <!-- <h2>Buscar por ID:</h2>
       <input id="id" v-model="id" type="text" placeholder="Ingrese ID" />
-      <button @click="consultarPorId">Consultar</button>
-      <form class="form" action="">
-        <p type="DATOS DEL ESTUDIANTE:"></p>
-        <p type="Nombre: ">
-          <input v-model="nombre" type="text" placeholder="nombre" />
-        </p>
-        <p type="Apellido: ">
-          <input v-model="apellido" type="text" placeholder="apellido" />
-        </p>
-        <p type="Genero: ">
-          <input v-model="genero" type="text" placeholder="genero" />
-        </p>
-        <p type="Fecha Nacimiento: ">
-          <input
-            v-model="fechaNacimiento"
-            type="text"
-            placeholder="fechaNacimiento"
-          />
-        </p>
-      </form>
-    </div>
-    <div class="POST">
+      <button @click="consultarPorId">Consultar</button> -->
+    <form class="form" action="">
+      <p type="DATOS DEL ESTUDIANTE:"></p>
+      <p type="Nombre: ">
+        <input v-model="body.nombre" type="text" placeholder="nombre" />
+      </p>
+      <p type="Apellido: ">
+        <input v-model="body.apellido" type="text" placeholder="apellido" />
+      </p>
+      <p type="Genero: ">
+        <input v-model="body.genero" type="text" placeholder="genero" />
+      </p>
+      <p type="Fecha Nacimiento: ">
+        <input
+          v-model="body.fechaNacimiento"
+          type="text"
+          placeholder="fechaNacimiento"
+        />
+      </p>
+    </form>
+  </div>
+  <!-- <div class="POST">
       <h2 id="titulo2">Ingresar DATOS:</h2>
       <form class="form2" action="">
         <p type="DATOS DEL INGRESO DE ESTUDIANTE:"></p>
@@ -39,8 +39,8 @@
       <button @click="insertar">Insertar</button>
       <button @click="actualizar">actualizar</button>
       <button @click="eliminar">eliminar</button>
-    </div>
-  </div>
+    </div> -->
+  <!-- </div> -->
 </template>
 
 <script>
@@ -51,18 +51,23 @@ import {
   eliminarFachada,
 } from "../helpers/clienteEstudiante.js";
 export default {
+  props: {
+    body: {
+      type: Object,
+      requerid: false,
+    },
+  },
+  watch: {
+    body: {
+      handler(newBody) {
+        // Emitir un evento al componente padre con los datos del estudiante
+        this.$emit("datosEnviados", newBody);
+      },
+      deep: true, // Para observar cambios profundos en el objeto
+    },
+  },
   data() {
-    return {
-      id: null,
-      nombre: null,
-      apellido: null,
-      genero: null,
-      fechaNacimiento: null,
-      nombreI: null,
-      apellidoI: null,
-      generoI: null,
-      fechaNacimientoI: null,
-    };
+    return {};
   },
   methods: {
     async consultarPorId() {
@@ -98,7 +103,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .container {
   display: grid;
   grid-template-columns: repeat(2, 40%);
