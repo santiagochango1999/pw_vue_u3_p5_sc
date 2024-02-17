@@ -1,10 +1,6 @@
 <template>
-  <!-- <h1>Componente Estudiante</h1> -->
-  <!-- <div class="container"> -->
   <div class="GET">
-    <!-- <h2>Buscar por ID:</h2>
-      <input id="id" v-model="id" type="text" placeholder="Ingrese ID" />
-      <button @click="consultarPorId">Consultar</button> -->
+   
     <form class="form" action="">
       <p type="DATOS DEL ESTUDIANTE:"></p>
       <p type="Nombre: ">
@@ -25,31 +21,10 @@
       </p>
     </form>
   </div>
-  <!-- <div class="POST">
-      <h2 id="titulo2">Ingresar DATOS:</h2>
-      <form class="form2" action="">
-        <p type="DATOS DEL INGRESO DE ESTUDIANTE:"></p>
-        <p type="Nombre: "><input v-model="nombreI" type="text" /></p>
-        <p type="Apellido: "><input v-model="apellidoI" type="text" /></p>
-        <p type="Genero: "><input v-model="generoI" type="text" /></p>
-        <p type="Fecha Nacimiento: ">
-          <input v-model="fechaNacimientoI" type="datetime" />
-        </p>
-      </form>
-      <button @click="insertar">Insertar</button>
-      <button @click="actualizar">actualizar</button>
-      <button @click="eliminar">eliminar</button>
-    </div> -->
-  <!-- </div> -->
+  
 </template>
 
 <script>
-import {
-  consultarEstudianteFachada,
-  insertarEstudianteFachada,
-  actualizarFachada,
-  eliminarFachada,
-} from "../helpers/clienteEstudiante.js";
 export default {
   props: {
     body: {
@@ -68,37 +43,6 @@ export default {
   },
   data() {
     return {};
-  },
-  methods: {
-    async consultarPorId() {
-      const data = await consultarEstudianteFachada(this.id);
-      console.log("Desde componente" + data);
-      this.nombre = data.nombre;
-      this.apellido = data.apellido;
-      this.genero = data.genero;
-      this.fechaNacimiento = data.fechaNacimiento;
-    },
-    async insertar() {
-      const estuBody = {
-        nombre: this.nombreI,
-        apellido: this.apellidoI,
-        genero: this.generoI,
-        fechaNacimiento: this.fechaNacimientoI,
-      };
-      await insertarEstudianteFachada(estuBody);
-    },
-    async actualizar() {
-      const body = {
-        nombre: this.nombreI,
-        apellido: this.apellidoI,
-        genero: this.generoI,
-        fechaNacimiento: this.fechaNacimientoI,
-      };
-      await actualizarFachada(this.id, body);
-    },
-    async eliminar() {
-      await eliminarFachada(this.id);
-    },
   },
 };
 </script>

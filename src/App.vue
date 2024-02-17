@@ -1,16 +1,19 @@
 <template>
   <!-- <EstudiantesPaginaVue/> -->
   <h1>Universidad Central</h1>
+  <NavBar/>
   <router-view/>
 </template>
 
 <script>
+import NavBar from './components/NavBar.vue'
 import EstudiantesPaginaVue from './pages/EstudiantesPagina.vue'
 
 export default {
   name: 'App',
   components: {
-    EstudiantesPaginaVue
+    EstudiantesPaginaVue,
+    NavBar
   }
 }
 </script>
